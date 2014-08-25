@@ -1,4 +1,4 @@
-# ngdoc-formatter
+# ngdoc-formatter [![NPM version][npm-image]][npm-url]
 
 > Populate a template with ngdoc parsed data. (using [ngdoc-parser](https://github.com/douglasduteil/ngdoc-parser))
 
@@ -38,7 +38,7 @@ fs.src('./compiled-doc/*.json')
 
 ##### template
 
-Type: `string`  
+Type: `string`
 Default: `ngdocFormatter.defaultMarkdownTemplate`
 
 The [nunjucks](http://mozilla.github.io/nunjucks) template to process with the ngdoc data.
@@ -49,11 +49,11 @@ The [nunjucks](http://mozilla.github.io/nunjucks) template to process with the n
 
 ##### ngdocSectionsOrder
 
-Type: `string[]`  
+Type: `string[]`
 Default: `changed.defaultNgdocSectionsOrder`
 
 
-Describe the order in which each grouped `@ngdoc` type will be describe in the final template.  
+Describe the order in which each grouped `@ngdoc` type will be describe in the final template.
 The default order is `changed.defaultNgdocSectionsOrder` :
 
     1.  function
@@ -93,3 +93,7 @@ fs.src('./src/*.js')
     terms of the Do What The Fuck You Want To Public License, Version 2,
     as published by Sam Hocevar. See the LICENCE file for more details.
 
+
+
+[npm-url]: https://npmjs.org/package/ngdoc-formatter
+[npm-image]: http://img.shields.io/npm/v/ngdoc-formatter.svg
