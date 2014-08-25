@@ -1,0 +1,62 @@
+[
+  {
+    "ngdoc": "function",
+    "name": "angular.lowercase",
+    "module": "ng",
+    "description": "Converts the specified string to lowercase.",
+    "params": [
+      {
+        "type": {
+          "typeExpression": "string",
+          "type": {"type": "NameExpression", "name": "string"},
+          "typeList": ["string"]
+        }, "name": {"name": "string"}, "description": "String to be converted to lowercase."
+      }
+    ],
+    "returns": {
+      "type": {
+        "typeExpression": "string",
+        "type": {"type": "NameExpression", "name": "string"},
+        "typeList": ["string"]
+      }, "description": "Lowercased string."
+    }
+  },
+  {
+    "ngdoc": "directive",
+    "name": "ngForm",
+    "restrict": "EAC",
+    "description": "Nestable alias of {@link ng.directive:form `form`} directive. HTML\ndoes not allow nesting of form elements. It is useful to nest forms, for example if the validity of a\nsub-group of controls needs to be determined.\n\nNote: the purpose of `ngForm` is to group controls,\nbut not to be a replacement for the `<form>` tag with all of its capabilities\n(e.g. posting to the server, ...).\n",
+    "params": [
+      {
+        "type": {
+          "typeExpression": "string=",
+          "type": {"type": "NameExpression", "name": "string", "optional": true},
+          "typeList": ["string"],
+          "optional": true
+        },
+        "name": {"name": "ngForm", "alias": "name"},
+        "description": "Name of the form. If specified, the form controller will be published into\n                      related scope, under this name."
+      }
+    ]
+  },
+  {
+    "ngdoc": "directive",
+    "name": "ngRepeat",
+    "description": "The `ngRepeat` directive instantiates a template once per item from a collection. Each template\ninstance gets its own scope, where the given loop variable is set to the current collection item,\nand `$index` is set to the item index or key.\n\nSpecial properties are exposed on the local scope of each template instance, including:\n\n| Variable  | Type            | Details                                                                     |\n|-----------|-----------------|-----------------------------------------------------------------------------|\n| `$index`  | {@type number}  | iterator offset of the repeated element (0..length-1)                       |\n| `$first`  | {@type boolean} | true if the repeated element is first in the iterator.                      |\n| `$middle` | {@type boolean} | true if the repeated element is between the first and last in the iterator. |\n| `$last`   | {@type boolean} | true if the repeated element is last in the iterator.                       |\n| `$even`   | {@type boolean} | true if the iterator position `$index` is even (otherwise false).           |\n| `$odd`    | {@type boolean} | true if the iterator position `$index` is odd (otherwise false).            |\n\nCreating aliases for these properties is possible with {@link ng.directive:ngInit `ngInit`}.\nThis may be useful when, for instance, nesting ngRepeats.\n\n# Special repeat start and end points\nTo repeat a series of elements instead of just one parent element, ngRepeat (as well as other ng directives) supports extending\nthe range of the repeater by defining explicit start and end points by using **ng-repeat-start** and **ng-repeat-end** respectively.\nThe **ng-repeat-start** directive works the same as **ng-repeat**, but will repeat all the HTML code (including the tag it's defined on)\nup to and including the ending HTML tag where **ng-repeat-end** is placed.\n\nThe example below makes use of this feature:\n```html\n  <header ng-repeat-start=\"item in items\">\n    Header {{ item }}\n  </header>\n  <div class=\"body\">\n    Body {{ item }}\n  </div>\n  <footer ng-repeat-end>\n    Footer {{ item }}\n  </footer>\n```\n\nAnd with an input of {@type ['A','B']} for the items variable in the example above, the output will evaluate to:\n```html\n  <header>\n    Header A\n  </header>\n  <div class=\"body\">\n    Body A\n  </div>\n  <footer>\n    Footer A\n  </footer>\n  <header>\n    Header B\n  </header>\n  <div class=\"body\">\n    Body B\n  </div>\n  <footer>\n    Footer B\n  </footer>\n```\n\nThe custom start and end points for ngRepeat also support all other HTML directive syntax flavors provided in AngularJS (such\nas **data-ng-repeat-start**, **x-ng-repeat-start** and **ng:repeat-start**).\n",
+    "animations": "",
+    "element": "ANY",
+    "scope": "",
+    "priority": "1000",
+    "params": [
+      {
+        "type": {
+          "typeExpression": "repeat_expression",
+          "type": {"type": "NameExpression", "name": "repeat_expression"},
+          "typeList": ["repeat_expression"]
+        },
+        "name": {"name": "ngRepeat"},
+        "description": "The expression indicating how to enumerate a collection. These\n  formats are currently supported:\n\n  * `variable in expression` – where variable is the user defined loop variable and `expression`\n    is a scope expression giving the collection to enumerate.\n\n    For example: `album in artist.albums`.\n\n  * `(key, value) in expression` – where `key` and `value` can be any user defined identifiers,\n    and `expression` is the scope expression giving the collection to enumerate.\n\n    For example: `(name, age) in {'adam':10, 'amalie':12}`.\n\n  * `variable in expression track by tracking_expression` – You can also provide an optional tracking function\n    which can be used to associate the objects in the collection with the DOM elements. If no tracking function\n    is specified the ng-repeat associates elements by identity in the collection. It is an error to have\n    more than one tracking function to resolve to the same key. (This would mean that two distinct objects are\n    mapped to the same DOM element, which is not possible.)  Filters should be applied to the expression,\n    before specifying a tracking expression.\n\n    For example: `item in items` is equivalent to `item in items track by $id(item)`. This implies that the DOM elements\n    will be associated by item identity in the array.\n\n  * `variable in expression as alias_expression` – You can also provide an optional alias expression which will then store the\n    intermediate results of the repeater after the filters have been applied. Typically this is used to render a special message\n    when a filter is active on the repeater, but the filtered result set is empty.\n\n    For example: `item in items | filter:x as results` will store the fragment of the repeated items as `results`, but only after\n    the items have been processed through the filter.\n\n    For example: `item in items track by $id(item)`. A built in `$id()` function can be used to assign a unique\n    `$$hashKey` property to each item in the array. This property is then used as a key to associated DOM elements\n    with the corresponding item in the array by identity. Moving the same object in array would move the DOM\n    element in the same way in the DOM.\n\n    For example: `item in items track by item.id` is a typical pattern when the items come from the database. In this\n    case the object identity does not matter. Two objects are considered equivalent as long as their `id`\n    property is same.\n\n    For example: `item in items | filter:searchText track by item.id` is a pattern that might be used to apply a filter\n    to items in conjunction with a tracking expression."
+      }
+    ]
+  }
+]

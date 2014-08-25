@@ -1,0 +1,27 @@
+{
+  "name": "ngdoc-formatter",
+  "version": "0.0.0",
+  "description": "Populate a template with ngdoc parsed data. (using ngdoc-parser)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "demo": "node ./demo/demo.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/douglasduteil/ngdoc-formatter.git"
+  },
+  "author": "Douglas Duteil",
+  "license": "WTFPL",
+  "bugs": {
+    "url": "https://github.com/douglasduteil/ngdoc-formatter/issues"
+  },
+  "homepage": "https://github.com/douglasduteil/ngdoc-formatter",
+  "dependencies": {
+    "lodash": "^2.4.1",
+    "marked": "^0.3.2",
+    "nunjucks": "^1.0.7",
+    "through2": "^0.6.1",
+    "vinyl-fs": "^0.3.6"
+  }
+}

@@ -1,0 +1,63 @@
+
+{# TODO describe module #}
+
+{##
+ # Each sections of the API.
+ # Generally each ngdoc type
+ #}
+{% for sectionName in sectionOrder -%}
+
+## {{sectionName}}
+
+{% set comments = sections[sectionName] %}
+
+{##
+ # Each ngdoc comments.
+ # Generally each ngdoc type
+ #}
+{% for comment in comments %}
+
+### {{ comment.name }}
+
+{{ comment.description }}
+
+#### Arguments
+
+<table>
+  <thead>
+    <tr>
+      <th>Param</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+  </thead>
+  <tbody>
+{##
+ # Each params
+ #}
+{% for param in comment.params %}
+<tr>
+  <td>
+    {{ param.name.name }} {{ "|" if param.name.alias }} {{param.name.alias}} {{ "(optional)" if  param.type.optional }}
+  </td>
+  <td>
+    {% for type in param.type.typeList %}
+    <code>{{ type }}</code>
+    {% endfor %}
+  </td>
+  <td>
+    {{ param.description }}
+  </td>
+</tr>
+{% endfor %}
+{# end param in comments.params loop #}
+
+  </tbody>
+</table>
+
+{% endfor %}
+{# end comment in comments loop #}
+
+
+{%- endfor %}
+{# end sectionName in sectionOrder loop #}
