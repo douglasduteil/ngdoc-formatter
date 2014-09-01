@@ -1,6 +1,6 @@
 {
   "name": "ngdoc-formatter",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Populate a template with ngdoc parsed data. (using ngdoc-parser)",
   "main": "index.js",
   "scripts": {
