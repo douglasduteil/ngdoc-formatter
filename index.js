@@ -15,7 +15,7 @@ ngdocFormatter.defaultNgdocSectionsOrder = ['function', 'directive', 'object', '
 
 function ngdocFormatter(options) {
 
-  options = _.defaults(options, {
+  options = _.defaults(options || {}, {
     template: ngdocFormatter.defaultMarkdownTemplate,
     ngdocSectionsOrder: ngdocFormatter.defaultNgdocSectionsOrder
   });
@@ -25,7 +25,7 @@ function ngdocFormatter(options) {
     var data = JSON.parse(file.contents.toString());
 
     // Precompile the params descriptions
-    _(data).pluck('params').flatten().each(function (param) {
+    _(data).pluck('params').flatten().compact().each(function (param) {
       param.description = param.description && marked(param.description);
     });
 
