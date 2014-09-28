@@ -1,0 +1,8 @@
+{##
+ # "h" macro.
+ # Generate a hX with the X level
+ #}
+
+{% macro h(name, level=1) %}
+{% for item in range(level) %}#{% endfor %} {{ name }}
+{% endmacro %}
