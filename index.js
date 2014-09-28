@@ -17,7 +17,8 @@ function ngdocFormatter(options) {
 
   options = _.defaults(options || {}, {
     template: ngdocFormatter.defaultMarkdownTemplate,
-    ngdocSectionsOrder: ngdocFormatter.defaultNgdocSectionsOrder
+    ngdocSectionsOrder: ngdocFormatter.defaultNgdocSectionsOrder,
+    hLevel: 1
   });
 
   return through.obj(function (file, enc, callback) {
@@ -37,7 +38,8 @@ function ngdocFormatter(options) {
     fs.src(options.template)
       .pipe(nunjucksTransform({
         sectionOrder: ngdocSectionOrder,
-        sections: sortedByNgdoc
+        sections: sortedByNgdoc,
+        hLevel : options.hLevel
       }))
       .pipe(through.obj(function (mdFile) {
         callback(null, mdFile);

@@ -1,4 +1,6 @@
 
+{% import "_macro.nunjucks" as macro %}
+
 {# TODO describe module #}
 
 {##
@@ -7,7 +9,7 @@
  #}
 {% for sectionName in sectionOrder -%}
 
-## {{sectionName}}
+{{ macro.h(sectionName, hLevel) }}
 
 {% set comments = sections[sectionName] %}
 
@@ -17,11 +19,11 @@
  #}
 {% for comment in comments %}
 
-### {{ comment.name }}
+{{ macro.h(comment.name, hLevel + 1) }}
 
 {{ comment.description }}
 
-#### Arguments
+{{ macro.h("Arguments", hLevel + 2) }}
 
 <table>
   <thead>
