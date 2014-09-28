@@ -26,9 +26,11 @@ function ngdocFormatter(options) {
     var data = JSON.parse(file.contents.toString());
 
     // Precompile the params descriptions
-    _(data).pluck('params').flatten().compact().each(function (param) {
+    function precompileParam(param) {
       param.description = param.description && marked(param.description);
-    });
+    }
+    _(data).pluck('params').flatten().compact().each(precompileParam);
+    _(data).pluck('properties').flatten().compact().each(precompileParam);
 
     var sortedByNgdoc = _.groupBy(data, 'ngdoc');
 
