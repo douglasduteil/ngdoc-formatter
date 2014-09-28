@@ -23,7 +23,12 @@
 
 {{ comment.description }}
 
-{{ macro.h("Arguments", hLevel + 2) }}
+{% if comment.params or comment.properties %}
+
+{% set subSectionTitle =  "Arguments" if comment.params else "Properties" %}
+{% set subSectionItems =  comment.params if comment.params else comment.properties %}
+
+{{ macro.h(subSectionTitle, hLevel + 2) }}
 
 <table>
   <thead>
@@ -37,7 +42,7 @@
 {##
  # Each params
  #}
-{% for param in comment.params %}
+{% for param in subSectionItems %}
 <tr>
   <td>
     {{ param.name.name }} {{ "|" if param.name.alias }} {{param.name.alias}} {{ "(optional)" if  param.type.optional }}
@@ -56,6 +61,7 @@
 
   </tbody>
 </table>
+{% endif %}
 
 {% endfor %}
 {# end comment in comments loop #}
